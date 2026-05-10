@@ -1,5 +1,6 @@
 .home {
   width: 100%;
+  min-height: calc(100vh - 72px);
   background-color: #f5f6f8;
 }
 
@@ -13,25 +14,39 @@
   display: inline-block;
   margin: 0 0 14px;
   padding: 8px 14px;
+
   border-radius: 999px;
   background-color: #ffd21e;
   color: #111827;
+
   font-size: 14px;
   font-weight: 700;
 }
 
-h1 {
+.title {
   margin: 0;
   max-width: 620px;
+
+  color: #111827;
   font-size: 42px;
   line-height: 1.1;
-  color: #111827;
 }
 
 .text {
   max-width: 620px;
   margin: 18px 0 0;
+
   color: #4b5563;
   font-size: 17px;
   line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 36px 18px 48px;
+  }
+
+  .title {
+    font-size: 34px;
+  }
 }
