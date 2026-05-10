@@ -4,23 +4,23 @@ function TrainCard({ train }) {
   return (
     <article className={styles.card}>
       <div className={styles.top}>
-        <span className={styles.number}>№ {train.trainNumber}</span>
+        <h3 className={styles.number}>№ {train.trainNumber}</h3>
         <span className={styles.type}>{train.trainType}</span>
       </div>
 
-        <div className={styles.route}>
-        <div className={styles.cityBlock}>
-            <p className={styles.city}>{train.from}</p>
-            <p className={styles.time}>{train.departureTime}</p>
+      <div className={styles.route}>
+        <div className={styles.routeBlock}>
+          <p className={styles.city}>{train.from}</p>
+          <p className={styles.time}>{train.departureTime}</p>
         </div>
 
         <div className={styles.line}></div>
 
-        <div className={styles.cityBlock}>
-            <p className={styles.city}>{train.to}</p>
-            <p className={styles.time}>{train.arrivalTime}</p>
+        <div className={styles.routeBlockRight}>
+          <p className={styles.city}>{train.to}</p>
+          <p className={styles.time}>{train.arrivalTime}</p>
         </div>
-        </div>
+      </div>
 
       <div className={styles.info}>
         <p>

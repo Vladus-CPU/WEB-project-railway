@@ -7,7 +7,7 @@
 .hero {
   max-width: 1180px;
   margin: 0 auto;
-  padding: 44px 24px 64px;
+  padding: 44px 24px 42px;
 }
 
 .badge {
@@ -42,13 +42,9 @@
   line-height: 1.6;
 }
 
-.hero :global(article) {
-  margin-top: 24px;
-}
-
 @media (max-width: 768px) {
   .hero {
-    padding: 36px 18px 48px;
+    padding: 36px 18px 36px;
   }
 
   .title {
