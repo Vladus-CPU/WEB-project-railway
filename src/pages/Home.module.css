@@ -1,0 +1,37 @@
+.home {
+  width: 100%;
+  background-color: #f5f6f8;
+}
+
+.hero {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 44px 24px 64px;
+}
+
+.badge {
+  display: inline-block;
+  margin: 0 0 14px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background-color: #ffd21e;
+  color: #111827;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+h1 {
+  margin: 0;
+  max-width: 620px;
+  font-size: 42px;
+  line-height: 1.1;
+  color: #111827;
+}
+
+.text {
+  max-width: 620px;
+  margin: 18px 0 0;
+  color: #4b5563;
+  font-size: 17px;
+  line-height: 1.6;
+}
