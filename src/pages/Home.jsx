@@ -19,6 +19,7 @@ function Home() {
 
     loadTrains();
   }, []);
+
 const filteredTrains = useMemo(() => {
   const query = searchQuery.trim().toLowerCase();
 
@@ -69,7 +70,7 @@ const filteredTrains = useMemo(() => {
         </div>
       </section>
 
-      <TrainList trains={filteredTrains} />
+      <TrainList trains={filteredTrains} searchQuery={searchQuery} />
     </main>
   );
 }

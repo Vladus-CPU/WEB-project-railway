@@ -1,7 +1,10 @@
 import TrainCard from './TrainCard';
 import styles from './TrainList.module.css';
 
-function TrainList({ trains }) {
+function TrainList({ trains, searchQuery }) {
+  const hasSearchQuery = searchQuery.trim().length > 0;
+  const isEmpty = hasSearchQuery && trains.length === 0;
+
   return (
     <section id="routes" className={styles.section}>
       <div className={styles.header}>
@@ -13,11 +16,18 @@ function TrainList({ trains }) {
         </div>
       </div>
 
-      <div className={styles.grid}>
-        {trains.map((train) => (
-          <TrainCard key={train.id} train={train} />
-        ))}
-      </div>
+      {isEmpty ? (
+        <div className={styles.empty}>
+          <h3>Рейсів не знайдено</h3>
+          <p>Спробуй змінити маршрут або номер потяга.</p>
+        </div>
+      ) : (
+        <div className={styles.grid}>
+          {trains.map((train) => (
+            <TrainCard key={train.id} train={train} />
+          ))}
+        </div>
+      )}
     </section>
   );
 }
