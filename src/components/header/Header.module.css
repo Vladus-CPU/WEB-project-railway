@@ -1,0 +1,167 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, Roboto, Arial, sans-serif;
+  background-color: #f9fafb;
+  color: #111827;
+}
+
+.header {
+  width: 100%;
+  min-height: 72px;
+
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  display: flex;
+  align-items: center;
+
+  background-color: #ffffff;
+  border-bottom: 1px solid #d1d5db;
+}
+
+.container {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  color: inherit;
+  text-decoration: none;
+  border-radius: 12px;
+  outline: none;
+}
+
+.brand:focus-visible {
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #eab308;
+}
+
+.logoBox {
+  width: 56px;
+  height: 56px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  background-color: #facc15;
+  border: 1px solid #eab308;
+  border-radius: 16px;
+
+  box-shadow: 0 5px 12px rgba(17, 24, 39, 0.16);
+
+  overflow: hidden;
+}
+
+.logo {
+  width: 56px;
+  height: 42px;
+
+  object-fit: contain;
+  flex-shrink: 0;
+
+  display: block;
+}
+
+.brandText {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.title {
+  color: #111827;
+
+  font-size: 1.08rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.subtitle {
+  color: #374151;
+
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.link {
+  padding: 9px 14px;
+
+  color: #374151;
+  text-decoration: none;
+
+  font-size: 0.94rem;
+  font-weight: 600;
+
+  border-radius: 10px;
+  outline: none;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.link:hover {
+  color: #111827;
+  background-color: #f3f4f6;
+}
+
+.link:focus-visible {
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #eab308;
+}
+
+.button {
+  padding: 10px 18px;
+
+  color: #111827;
+  background-color: #facc15;
+
+  text-decoration: none;
+
+  font-size: 0.94rem;
+  font-weight: 700;
+
+  border: 1px solid #eab308;
+  border-radius: 10px;
+  outline: none;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.button:hover {
+  background-color: #fbbf24;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(17, 24, 39, 0.12);
+}
+
+.button:focus-visible {
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #eab308;
+}

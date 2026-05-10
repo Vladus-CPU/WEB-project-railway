@@ -1,7 +1,9 @@
+import Header from "./components/header/Header";
+
 function App() {
   return (
     <div>
-      <h1>Railway Booking System</h1>
+      <Header/>
     </div>
   );
 }
