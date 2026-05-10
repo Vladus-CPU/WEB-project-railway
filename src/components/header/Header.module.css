@@ -35,7 +35,6 @@ body {
   justify-content: space-between;
   gap: 24px;
 }
-
 .brand {
   display: flex;
   align-items: center;
@@ -43,41 +42,65 @@ body {
 
   color: inherit;
   text-decoration: none;
-  border-radius: 12px;
+  border-radius: 14px;
   outline: none;
+
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.brand:hover {
+  transform: translateY(-1px);
 }
 
 .brand:focus-visible {
-  box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #eab308;
+  box-shadow: 0 0 0 2px #ffffff, 0 0 0 5px rgba(0, 87, 183, 0.45);
 }
 
 .logoBox {
   width: 56px;
-  height: 56px;
+  height: 58px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
   flex-shrink: 0;
+  position: relative;
 
-  background-color: #facc15;
-  border: 1px solid #eab308;
-  border-radius: 16px;
+  background: linear-gradient(135deg, #0057b7 0%, #036ee1 45%, #fdea7c 55%, #ffd700 100%);
+  border: 1px solid rgba(255, 215, 0, 0.9);
+  border-radius: 18px;
 
-  box-shadow: 0 5px 12px rgba(17, 24, 39, 0.16);
+  box-shadow:
+    0 8px 18px rgba(17, 89, 166, 0.32),
+    0 4px 10px rgba(100, 85, 1, 0.5);
 
   overflow: hidden;
 }
 
+.logoBox::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+
+  background: rgba(255, 215, 0, 0.92);
+  border-radius: 13px;
+
+  box-shadow: inset 0 0 0 1px rgba(0, 87, 183, 0.25);
+}
+
 .logo {
-  width: 56px;
-  height: 42px;
+  width: 48px;
+  height: 34px;
 
   object-fit: contain;
   flex-shrink: 0;
 
   display: block;
+  position: relative;
+  z-index: 1;
+
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.35));
 }
 
 .brandText {
@@ -87,19 +110,27 @@ body {
 }
 
 .title {
-  color: #111827;
-
-  font-size: 1.08rem;
-  font-weight: 800;
-  line-height: 1.1;
+  font-size: 19px;
+  font-weight: 900;
+  letter-spacing: 0.4px;
+background: linear-gradient(
+    180deg, 
+    #013c7b 0%, 
+    #3697ff 50%,
+    #b9be83 60%,
+    #ffe13a 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
 }
 
 .subtitle {
-  color: #374151;
-
-  font-size: 0.82rem;
+  font-size: 13px;
   font-weight: 600;
-  line-height: 1.2;
+  color: #1e3a8a;
+  letter-spacing: 0.2px;
 }
 
 .nav {

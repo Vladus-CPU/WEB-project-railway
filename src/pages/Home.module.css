@@ -12,33 +12,38 @@
 
 .badge {
   display: inline-block;
-  margin: 0 0 14px;
-  padding: 8px 14px;
+  margin: 0 0 16px;
+  padding: 8px 16px;
 
   border-radius: 999px;
   background-color: #ffd21e;
   color: #111827;
 
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .title {
   margin: 0;
-  max-width: 620px;
+  max-width: 720px;
 
   color: #111827;
-  font-size: 42px;
+  font-size: 44px;
   line-height: 1.1;
+  letter-spacing: -0.8px;
 }
 
 .text {
-  max-width: 620px;
+  max-width: 640px;
   margin: 18px 0 0;
 
   color: #4b5563;
   font-size: 17px;
   line-height: 1.6;
+}
+
+.hero :global(article) {
+  margin-top: 24px;
 }
 
 @media (max-width: 768px) {
