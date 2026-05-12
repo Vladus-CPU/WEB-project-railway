@@ -3,6 +3,7 @@ import styles from './Booking.module.css';
 import { useEffect, useState } from 'react';
 import { getTrainById } from '../services/api';
 import { useBooking } from '../context/BookingContext';
+import WagonSelector from '../components/WagonSelector';
 
 function Booking() {
   const { trainId } = useParams();
@@ -26,7 +27,7 @@ function Booking() {
         }
 
         setSelectedTrain(data);
-        setSelectedWagon(null);
+        setSelectedWagon((data && data.wagons && data.wagons[0]) || null);
         setSelectedSeats([]);
       } catch {
         if (isActive) {
@@ -108,6 +109,7 @@ function Booking() {
                 <strong>{selectedTrain.price} грн</strong>
               </div>
             </div>
+            <WagonSelector/>
           </>
         )}
       </section>
