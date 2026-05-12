@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { getTrainById } from '../services/api';
 import { useBooking } from '../context/BookingContext';
 import WagonSelector from '../components/WagonSelector';
+import SeatMap from '../components/SeatMap';
 
 function Booking() {
   const { trainId } = useParams();
@@ -110,6 +111,7 @@ function Booking() {
               </div>
             </div>
             <WagonSelector/>
+            <SeatMap />
           </>
         )}
       </section>
