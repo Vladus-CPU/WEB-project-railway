@@ -5,11 +5,12 @@ import { getTrainById } from '../services/TrainService';
 import { useBooking } from '../context/BookingContext';
 import WagonSelector from '../components/WagonSelector';
 import SeatMap from '../components/SeatMap';
+import { getBookedSeats } from '../services/BookingService';
 
 function Booking() {
   const { trainId } = useParams();
 
-  const { selectedTrain, setSelectedTrain, setSelectedWagon, setSelectedSeats } = useBooking();
+  const { selectedTrain, setSelectedTrain, selectedWagon, setSelectedWagon, setSelectedSeats, setBookedSeats} = useBooking();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -30,6 +31,7 @@ function Booking() {
         setSelectedTrain(data);
         setSelectedWagon((data && data.wagons && data.wagons[0]) || null);
         setSelectedSeats([]);
+        setBookedSeats([]);
       } catch {
         if (isActive) {
           setError('Не вдалося завантажити дані рейсу');
@@ -46,7 +48,26 @@ function Booking() {
     return () => {
       isActive = false;
     };
-  }, [trainId, setSelectedTrain, setSelectedWagon, setSelectedSeats]);
+  }, [trainId, setSelectedTrain, setSelectedWagon, setSelectedSeats, setBookedSeats]);
+
+  useEffect(() => {
+    if (!selectedTrain || !selectedWagon) {
+      return;
+    }
+
+    async function loadBookedSeats() {
+      try {
+        const data = await getBookedSeats(selectedTrain.id, selectedWagon.id);
+        setBookedSeats(data.bookedSeats);
+        setSelectedSeats([]);
+      } catch (error) {
+        console.error(error);
+        setBookedSeats([]);
+      }
+    }
+
+    loadBookedSeats();
+  }, [selectedTrain, selectedWagon, setBookedSeats, setSelectedSeats]);
 
   return (
     <main className={styles.page}>

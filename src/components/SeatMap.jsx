@@ -2,7 +2,7 @@ import { useBooking } from '../context/BookingContext';
 import styles from './SeatMap.module.css';
 
 function SeatMap() {
-  const { selectedWagon, selectedSeats, setSelectedSeats } = useBooking();
+  const { selectedWagon, selectedSeats, setSelectedSeats, bookedSeats } = useBooking();
 
   if (!selectedWagon) {
     return null;
@@ -20,6 +20,9 @@ function SeatMap() {
   }
 
   function handleSeatClick(seat) {
+    if (bookedSeats.includes(seat)) {
+      return;
+    }
     setSelectedSeats((currentSeats) => {
       if (currentSeats.includes(seat)) {
         return currentSeats.filter((item) => item !== seat);
@@ -27,6 +30,32 @@ function SeatMap() {
 
       return [...currentSeats, seat].sort((a, b) => a - b);
     });
+  }
+
+  function getSeatClass(seat) {
+    if (bookedSeats.includes(seat)) {
+      return `${styles.seat} ${styles.seatBooked}`;
+    }
+
+    if (selectedSeats.includes(seat)) {
+      return `${styles.seat} ${styles.seatSelected}`;
+    }
+
+    return styles.seat;
+  }
+
+  function renderSeat(seat) {
+    return (
+      <button
+        className={getSeatClass(seat)}
+        type="button"
+        key={seat}
+        onClick={() => handleSeatClick(seat)}
+        disabled={bookedSeats.includes(seat)}
+      >
+        {seat}
+      </button>
+    );
   }
 
   return (
@@ -50,39 +79,13 @@ function SeatMap() {
             {sections.map((section, index) => (
               <div className={styles.seatSection} key={index}>
                 <div className={styles.seatRow}>
-                  {section.slice(0, 2).map((seat) => {
-                    const isSelected = selectedSeats.includes(seat);
-
-                    return (
-                      <button
-                        className={`${styles.seat} ${isSelected ? styles.seatSelected : ''}`}
-                        type="button"
-                        key={seat}
-                        onClick={() => handleSeatClick(seat)}
-                      >
-                        {seat}
-                      </button>
-                    );
-                  })}
+                  {section.slice(0, 2).map(renderSeat)}
                 </div>
 
                 <div className={styles.aisle}></div>
 
                 <div className={styles.seatRow}>
-                  {section.slice(2, 4).map((seat) => {
-                    const isSelected = selectedSeats.includes(seat);
-
-                    return (
-                      <button
-                        className={`${styles.seat} ${isSelected ? styles.seatSelected : ''}`}
-                        type="button"
-                        key={seat}
-                        onClick={() => handleSeatClick(seat)}
-                      >
-                        {seat}
-                      </button>
-                    );
-                  })}
+                  {section.slice(2, 4).map(renderSeat)}
                 </div>
               </div>
             ))}

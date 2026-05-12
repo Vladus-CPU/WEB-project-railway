@@ -6,6 +6,7 @@ export function BookingProvider({ children }) {
   const [selectedTrain, setSelectedTrain] = useState(null);
   const [selectedWagon, setSelectedWagon] = useState(null);
   const [selectedSeats, setSelectedSeats] = useState([]);
+  const [bookedSeats, setBookedSeats] = useState([]);
 
   const value = {
     selectedTrain,
@@ -13,7 +14,9 @@ export function BookingProvider({ children }) {
     selectedWagon,
     setSelectedWagon,
     selectedSeats,
-    setSelectedSeats
+    setSelectedSeats,
+    bookedSeats,
+    setBookedSeats
   };
 
   return (
