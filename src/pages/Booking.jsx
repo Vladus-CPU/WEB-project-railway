@@ -6,6 +6,7 @@ import { useBooking } from '../context/BookingContext';
 import WagonSelector from '../components/WagonSelector';
 import SeatMap from '../components/SeatMap';
 import { getBookedSeats } from '../services/BookingService';
+import BookingForm from '../components/BookingForm';
 
 function Booking() {
   const { trainId } = useParams();
@@ -132,7 +133,8 @@ function Booking() {
               </div>
             </div>
             <WagonSelector/>
-            <SeatMap />
+            <SeatMap/>
+            <BookingForm/>
           </>
         )}
       </section>
