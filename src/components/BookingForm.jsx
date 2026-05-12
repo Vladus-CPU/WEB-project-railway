@@ -11,14 +11,46 @@ function BookingForm() {
     email: ''
   });
 
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+
   function handleChange(event) {
     const { name, value } = event.target;
 
     setPassenger((currentPassenger) => ({...currentPassenger,[name]: value }));
+    setError('');
+    setSuccess('');
   }
 
   function handleSubmit(event) {
     event.preventDefault();
+
+    if (!selectedWagon) {
+      setError('Спочатку оберіть вагон');
+      return;
+    }
+
+    if (selectedSeats.length === 0) {
+      setError('Оберіть хоча б одне місце');
+      return;
+    }
+
+    if (!passenger.name.trim()) {
+      setError('Введіть ім’я пасажира');
+      return;
+    }
+
+    if (!passenger.phone.trim()) {
+      setError('Введіть номер телефону');
+      return;
+    }
+
+    if (!passenger.email.trim()) {
+      setError('Введіть email');
+      return;
+    }
+
+    setSuccess('Дані заповнено коректно. Можна переходити до бронювання.');
   }
 
   return (
@@ -41,6 +73,9 @@ function BookingForm() {
             </strong>
           </p>
         </div>
+
+        {error && <p className={styles.error}>{error}</p>}
+        {success && <p className={styles.success}>{success}</p>}
 
         <div className={styles.fields}>
           <label className={styles.field}>

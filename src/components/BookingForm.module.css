@@ -108,6 +108,32 @@
   transform: translateY(-1px);
 }
 
+.error {
+  margin: 0;
+  padding: 12px 14px;
+
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 12px;
+  color: #b91c1c;
+
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.success {
+  margin: 0;
+  padding: 12px 14px;
+
+  background-color: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 12px;
+  color: #15803d;
+
+  font-size: 14px;
+  font-weight: 800;
+}
+
 @media (max-width: 850px) {
   .fields {
     grid-template-columns: 1fr;
