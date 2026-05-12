@@ -20,11 +20,7 @@ function Header() {
         </a>
 
         <nav className={styles.nav}>
-          <a href="#routes" className={styles.link}>
-            Рейси
-          </a>
-
-          <a href="#routes" className={styles.button}>
+          <a href="/#routes" className={styles.button}>
             Переглянути рейси
           </a>
         </nav>
