@@ -135,6 +135,34 @@
   filter: brightness(0.95);
 }
 
+.seatSelected {
+  background-color: #3b82f6;
+}
+
+.selectedInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+  padding: 14px 16px;
+  background-color: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+}
+
+.selectedInfo span {
+  color: #6b7280;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.selectedInfo strong {
+  color: #111827;
+  font-size: 15px;
+  font-weight: 900;
+}
+
 @media (max-width: 768px) {
   .title {
     font-size: 24px;

@@ -2,7 +2,7 @@ import { useBooking } from '../context/BookingContext';
 import styles from './SeatMap.module.css';
 
 function SeatMap() {
-  const { selectedWagon } = useBooking();
+  const { selectedWagon, selectedSeats, setSelectedSeats } = useBooking();
 
   if (!selectedWagon) {
     return null;
@@ -12,10 +12,21 @@ function SeatMap() {
   for (let i = 1; i <= selectedWagon.seatCount; i++) {
     seats.push(i);
   }
+
   const sections = [];
 
   for (let i = 0; i < seats.length; i += 4) {
     sections.push(seats.slice(i, i + 4));
+  }
+
+  function handleSeatClick(seat) {
+    setSelectedSeats((currentSeats) => {
+      if (currentSeats.includes(seat)) {
+        return currentSeats.filter((item) => item !== seat);
+      }
+
+      return [...currentSeats, seat].sort((a, b) => a - b);
+    });
   }
 
   return (
@@ -39,21 +50,39 @@ function SeatMap() {
             {sections.map((section, index) => (
               <div className={styles.seatSection} key={index}>
                 <div className={styles.seatRow}>
-                  {section.slice(0, 2).map((seat) => (
-                    <button className={styles.seat} type="button" key={seat}>
-                      {seat}
-                    </button>
-                  ))}
+                  {section.slice(0, 2).map((seat) => {
+                    const isSelected = selectedSeats.includes(seat);
+
+                    return (
+                      <button
+                        className={`${styles.seat} ${isSelected ? styles.seatSelected : ''}`}
+                        type="button"
+                        key={seat}
+                        onClick={() => handleSeatClick(seat)}
+                      >
+                        {seat}
+                      </button>
+                    );
+                  })}
                 </div>
 
                 <div className={styles.aisle}></div>
 
                 <div className={styles.seatRow}>
-                  {section.slice(2, 4).map((seat) => (
-                    <button className={styles.seat} type="button" key={seat}>
-                      {seat}
-                    </button>
-                  ))}
+                  {section.slice(2, 4).map((seat) => {
+                    const isSelected = selectedSeats.includes(seat);
+
+                    return (
+                      <button
+                        className={`${styles.seat} ${isSelected ? styles.seatSelected : ''}`}
+                        type="button"
+                        key={seat}
+                        onClick={() => handleSeatClick(seat)}
+                      >
+                        {seat}
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
             ))}
@@ -61,6 +90,13 @@ function SeatMap() {
 
           <div className={styles.door}>Вихід</div>
         </div>
+      </div>
+
+      <div className={styles.selectedInfo}>
+        <span>Обрані місця:</span>
+        <strong>
+          {selectedSeats.length > 0 ? selectedSeats.join(', ') : 'не обрано'}
+        </strong>
       </div>
     </section>
   );
