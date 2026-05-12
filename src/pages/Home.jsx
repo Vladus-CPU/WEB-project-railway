@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import TrainList from '../components/TrainList';
-import { getTrains } from '../services/api';
+import { getTrains } from '../services/TrainService';
 import styles from './Home.module.css';
 
 function Home() {

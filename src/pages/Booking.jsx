@@ -1,7 +1,7 @@
 import { Link, useParams } from 'react-router-dom';
 import styles from './Booking.module.css';
 import { useEffect, useState } from 'react';
-import { getTrainById } from '../services/api';
+import { getTrainById } from '../services/TrainService';
 import { useBooking } from '../context/BookingContext';
 import WagonSelector from '../components/WagonSelector';
 import SeatMap from '../components/SeatMap';
