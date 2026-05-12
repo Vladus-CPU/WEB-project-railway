@@ -15,6 +15,7 @@ function BookingForm() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [bookingResult, setBookingResult] = useState(null);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -22,6 +23,7 @@ function BookingForm() {
     setPassenger((currentPassenger) => ({...currentPassenger,[name]: value }));
     setError('');
     setSuccess('');
+    setBookingResult(null);
   }
 
   async function handleSubmit(event) {
@@ -68,6 +70,18 @@ function BookingForm() {
         seats: selectedSeats,
         passenger
       });
+      setBookingResult({
+        id: data.booking.id,
+        trainNumber: selectedTrain.trainNumber,
+        route: `${selectedTrain.from} - ${selectedTrain.to}`,
+        date: selectedTrain.departureDate,
+        departureTime: selectedTrain.departureTime,
+        arrivalTime: selectedTrain.arrivalTime,
+        wagonNumber: selectedWagon.number,
+        wagonType: selectedWagon.type,
+        seats: data.booking.seats,
+        passenger: data.booking.passenger
+    });
 
       setBookedSeats(data.bookedSeats);
       setSelectedSeats([]);
@@ -108,6 +122,54 @@ function BookingForm() {
 
         {error && <p className={styles.error}>{error}</p>}
         {success && <p className={styles.success}>{success}</p>}
+        {bookingResult && (
+        <div className={styles.ticket}>
+            <div className={styles.ticketHeader}>
+            <span>Бронювання № {bookingResult.id}</span>
+            <strong>{bookingResult.trainNumber}</strong>
+            </div>
+
+            <div className={styles.ticketRoute}>
+            {bookingResult.route}
+            </div>
+
+            <div className={styles.ticketGrid}>
+            <p>
+                <span>Дата</span>
+                <strong>{bookingResult.date}</strong>
+            </p>
+
+            <p>
+                <span>Час</span>
+                <strong>
+                {bookingResult.departureTime} - {bookingResult.arrivalTime}
+                </strong>
+            </p>
+
+            <p>
+                <span>Вагон</span>
+                <strong>
+                {bookingResult.wagonNumber}, {bookingResult.wagonType}
+                </strong>
+            </p>
+
+            <p>
+                <span>Місця</span>
+                <strong>{bookingResult.seats.join(', ')}</strong>
+            </p>
+
+            <p>
+                <span>Пасажир</span>
+                <strong>{bookingResult.passenger.name}</strong>
+            </p>
+
+            <p>
+                <span>Телефон</span>
+                <strong>{bookingResult.passenger.phone}</strong>
+            </p>
+            </div>
+        </div>
+        )}
 
         <div className={styles.fields}>
           <label className={styles.field}>
