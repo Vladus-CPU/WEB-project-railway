@@ -5,11 +5,13 @@ export async function getBookedSeats(trainId, wagonId) {
     `${baseURL}/bookings?trainId=${trainId}&wagonId=${wagonId}`
   );
 
+  const data = await response.json();
+
   if (!response.ok) {
-    throw new Error('Помилка отримання даних про заброньовані місця');
+    throw new Error(data.message || 'Помилка отримання даних про заброньовані місця');
   }
 
-  return response.json();
+  return data;
 }
 
 export async function createBooking(bookingData) {
@@ -21,9 +23,11 @@ export async function createBooking(bookingData) {
     body: JSON.stringify(bookingData)
   });
 
+  const data = await response.json();
+
   if (!response.ok) {
-    throw new Error('Помилка створення бронювання');
+    throw new Error(data.message || 'Помилка створення бронювання');
   }
 
-  return response.json();
+  return data;
 }

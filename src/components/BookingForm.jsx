@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useBooking } from '../context/BookingContext';
+import { createBooking } from '../services/BookingService';
 import styles from './BookingForm.module.css';
 
 function BookingForm() {
-  const { selectedWagon, selectedSeats } = useBooking();
+  const { selectedTrain, selectedWagon, selectedSeats, setSelectedSeats, setBookedSeats } = useBooking();
 
   const [passenger, setPassenger] = useState({
     name: '',
@@ -13,6 +14,7 @@ function BookingForm() {
 
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -22,8 +24,13 @@ function BookingForm() {
     setSuccess('');
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
+
+    if (!selectedTrain) {
+      setError('Дані рейсу не завантажено');
+      return;
+    }
 
     if (!selectedWagon) {
       setError('Спочатку оберіть вагон');
@@ -50,7 +57,32 @@ function BookingForm() {
       return;
     }
 
-    setSuccess('Дані заповнено коректно. Можна переходити до бронювання.');
+    try {
+      setIsSubmitting(true);
+      setError('');
+      setSuccess('');
+
+      const data = await createBooking({
+        trainId: selectedTrain.id,
+        wagonId: selectedWagon.id,
+        seats: selectedSeats,
+        passenger
+      });
+
+      setBookedSeats(data.bookedSeats);
+      setSelectedSeats([]);
+      setPassenger({
+        name: '',
+        phone: '',
+        email: ''
+      });
+
+      setSuccess('Квиток успішно заброньовано');
+    } catch (error) {
+      setError(error.message || 'Не вдалося створити бронювання');
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -112,8 +144,8 @@ function BookingForm() {
           </label>
         </div>
 
-        <button className={styles.button} type="submit">
-          Забронювати квиток
+        <button className={styles.button} type="submit" disabled={isSubmitting}>
+          {isSubmitting ? 'Бронювання...' : 'Забронювати квиток'}
         </button>
       </form>
     </section>
