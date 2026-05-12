@@ -2,28 +2,49 @@ import { Link, useParams } from 'react-router-dom';
 import styles from './Booking.module.css';
 import { useEffect, useState } from 'react';
 import { getTrainById } from '../services/api';
+import { useBooking } from '../context/BookingContext';
 
 function Booking() {
   const { trainId } = useParams();
 
-  const [train, setTrain] = useState(null);
+  const { selectedTrain, setSelectedTrain, setSelectedWagon, setSelectedSeats } = useBooking();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
 
   useEffect(() => {
+    let isActive = true;
+
     async function loadTrain() {
       try {
+        setIsLoading(true);
+        setError('');
+
         const data = await getTrainById(trainId);
-        setTrain(data);
+
+        if (!isActive) {
+          return;
+        }
+
+        setSelectedTrain(data);
+        setSelectedWagon(null);
+        setSelectedSeats([]);
       } catch {
-        setError('Не вдалося завантажити дані рейсу');
+        if (isActive) {
+          setError('Не вдалося завантажити дані рейсу');
+        }
       } finally {
-        setIsLoading(false);
+        if (isActive) {
+          setIsLoading(false);
+        }
       }
     }
 
     loadTrain();
-  }, [trainId]);
+
+    return () => {
+      isActive = false;
+    };
+  }, [trainId, setSelectedTrain, setSelectedWagon, setSelectedSeats]);
 
   return (
     <main className={styles.page}>
@@ -49,43 +70,42 @@ function Booking() {
           </div>
         )}
 
-        {!isLoading && !error && train && (
+        {!isLoading && !error && selectedTrain && (
           <>
             <div className={styles.trainHeader}>
               <div>
-                <p className={styles.trainNumber}>№ {train.trainNumber}</p>
+                <p className={styles.trainNumber}>№ {selectedTrain.trainNumber}</p>
                 <h1 className={styles.title}>
-                  {train.from} - {train.to}
+                  {selectedTrain.from} - {selectedTrain.to}
                 </h1>
               </div>
-
-              <span className={styles.trainType}>{train.trainType}</span>
+              <span className={styles.trainType}>{selectedTrain.trainType}</span>
             </div>
 
             <div className={styles.detailsGrid}>
               <div className={styles.detailItem}>
                 <span>Дата</span>
-                <strong>{train.departureDate}</strong>
+                <strong>{selectedTrain.departureDate}</strong>
               </div>
 
               <div className={styles.detailItem}>
                 <span>Відправлення</span>
-                <strong>{train.departureTime}</strong>
+                <strong>{selectedTrain.departureTime}</strong>
               </div>
 
               <div className={styles.detailItem}>
                 <span>Прибуття</span>
-                <strong>{train.arrivalTime}</strong>
+                <strong>{selectedTrain.arrivalTime}</strong>
               </div>
 
               <div className={styles.detailItem}>
                 <span>Тривалість</span>
-                <strong>{train.duration}</strong>
+                <strong>{selectedTrain.duration}</strong>
               </div>
 
               <div className={styles.detailItem}>
                 <span>Ціна від</span>
-                <strong>{train.price} грн</strong>
+                <strong>{selectedTrain.price} грн</strong>
               </div>
             </div>
           </>
