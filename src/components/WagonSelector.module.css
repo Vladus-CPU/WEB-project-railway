@@ -1,0 +1,94 @@
+.section {
+  margin-top: 32px;
+  padding-top: 30px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.header {
+  margin-bottom: 18px;
+}
+
+.label {
+  margin: 0 0 8px;
+  color: #d19a00;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.title {
+  margin: 0;
+  color: #111827;
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: -0.4px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 16px;
+}
+
+.wagonCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
+  padding: 18px;
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  color: #111827;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.wagonCard:hover {
+  transform: translateY(-2px);
+  border-color: #ffd21e;
+  background-color: #ffffff;
+  box-shadow: 0 12px 24px rgba(17, 24, 39, 0.08);
+}
+
+.active {
+  border-color: #ffd21e;
+  background-color: #fff8d8;
+  box-shadow: 0 12px 24px rgba(17, 24, 39, 0.08);
+}
+
+.wagonNumber {
+  color: #6b7280;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.wagonType {
+  color: #111827;
+  font-size: 22px;
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+.wagonInfo {
+  color: #374151;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.description {
+  color: #6b7280;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+@media (max-width: 520px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+}
